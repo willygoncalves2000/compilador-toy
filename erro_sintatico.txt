@@ -1,0 +1,4 @@
+inicio
+    leia("entre com x: ", x)
+    x = 5;  # linha anterior faltou ';', sintaxe incorreta
+fim.

@@ -1,5 +1,10 @@
+#---------------------------------------------------
+# Tradutor para a linguagem TOY
+#
+# baseado no main da linguagem CALC
+#---------------------------------------------------
 from lexico import Lexico
-
+from sintatico import Sintatico
 
 class Tradutor:
 
@@ -9,14 +14,15 @@ class Tradutor:
     def inicializa(self):
         self.arq = open(self.nomeArq, "r")
         self.lexico = Lexico(self.arq)
+        self.sintatico = Sintatico(self.lexico)
+
+    def traduz(self):
+        print("🚀 Iniciando tradução (análise sintática)...\n")
+        self.sintatico.traduz()
 
     def testaLexico(self):
         print("🔎 Iniciando análise léxica...\n")
-        while True:
-            token = self.lexico.getToken()
-            self.lexico.imprimeToken(token)
-            if token[0].name == "eof":  # quando chega no EOF, encerra
-                break
+        self.sintatico.testaLexico()
 
     def finaliza(self):
         self.arq.close()
@@ -24,7 +30,11 @@ class Tradutor:
 
 # inicia a tradução
 if __name__ == '__main__':
-    x = Tradutor('toy.txt')
+    x = Tradutor('toy.txt')  # arquivo fonte da linguagem TOY
     x.inicializa()
-    x.testaLexico()
+
+    # escolha o que rodar:
+    #x.testaLexico()   # análise léxica
+    x.traduz()         # tradução + análise sintática
+
     x.finaliza()

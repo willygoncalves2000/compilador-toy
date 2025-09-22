@@ -1,0 +1,4 @@
+inicio
+    leia("entre com x: ", x);
+    x = 5 @ y;   # '@' é inválido, deve causar erro léxico
+fim.
